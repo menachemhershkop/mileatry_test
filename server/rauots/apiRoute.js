@@ -1,6 +1,7 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
 import run from '../db/connect.js';
+import { launcher } from '../modules/launcherModel.js';
 
 export const apiRoute = express();
 const db = run()
@@ -16,7 +17,7 @@ apiRoute.post('/launchers', async (req, res) => {
         res.status(401).json({ msg: 'Requyemnts felds less' })
     }
     else {
-        const resuilt = await db.then(data => data.insertOne({ id: id, city: city, rocketType: rocketType, latitude: latitude, longitude: longitude, name: name }))
+        const resuilt = await db.then(data => data.insertOne(new launcher(id, name, rocketType,latitude,longitude,city)))
         res.status(201).json({ msg: resuilt.insertedId })
     }
 })

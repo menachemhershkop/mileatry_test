@@ -1,10 +1,11 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-function Layout(children) {
+function Layout({children}) {
   return (
     <div>
-        <Link to={'/'}>HomePage</Link>
-        <Link to={'/AddLauncher'}>Add</Link>
+        <button><Link to={'/'}>HomePage</Link></button>
+        <button><Link to={'/AddLauncher'}>Add</Link></button>
       <main>{children}</main>
     </div>
   )
