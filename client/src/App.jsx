@@ -14,8 +14,8 @@ function App() {
     {/* <Layout> */}
      <Routes>
       <Route index element={<HomePage/>}/>
-      <Route path ="/LauncherDetailsPage" element={<LauncherDetailsPage/>}/>
-      <Route path='/AddLauncherPage' element={<AddLauncherPage/>}/>
+      <Route path ="/Launcher/:id" element={<LauncherDetailsPage/>}/>
+      <Route path='/AddLauncher' element={<AddLauncherPage/>}/>
      </Routes>
      {/* </Layout> */}
     </>

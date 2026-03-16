@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios';
+import { useNavigate } from 'react-router';
 
 function AddLauncherPage() {
     const [name, setName]= useState('');
@@ -8,14 +9,18 @@ function AddLauncherPage() {
     const [longitude, setLongitude] =useState(0);
     const [city, setCity]= useState('');
     const [response, setResponseMessage] = useState('')
+    const id =Number(localStorage.getItem('amount'))+1
+    const nevgate = useNavigate()
     const handelSubmit = async (e)=>{
             e.preventDefault();
-            const newLauncher = {name:name, rocketType:rocketType, latitude:latitude, longitude:longitude, city:city}
+            const newLauncher = {id:id, name:name, rocketType:rocketType, latitude:latitude, longitude:longitude, city:city}
             axios.post("http://localhost:3000/api/launchers", newLauncher)
             .then((response) => {
-                console.log(response);
-                
+            
                 setResponseMessage("Post created successfully!");
+                setTimeout(()=>{
+                    nevgate('/')
+                }, 1000)
             })
             .catch((err) => {
                 setResponseMessage("Error creating post");
