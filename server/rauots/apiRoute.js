@@ -45,3 +45,16 @@ apiRoute.delete('/launchers/:id', async (req, res) => {
         res.status(200).json({ msg: del.deletedCount })
     }
 })
+
+apiRoute.put('/launchers/:id', async (req, res) => {
+    const param = Number(req.params.id)
+    const finder = await db.then(data => data.find({ id: param }).toArray())
+    if (finder.length === 0) {
+        res.status(404).json({ msg: 'id not found' })
+    }
+    else {
+        const update = await db.then(data => data.updateOne({ id: param },{$set:req.body}))
+
+        res.status(200).json({ msg: update.upsertedId })
+    }
+})
