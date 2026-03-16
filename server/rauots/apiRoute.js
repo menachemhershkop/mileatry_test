@@ -34,9 +34,7 @@ apiRoute.get('/launchers/:id', async (req, res) => {
     }
 })
 apiRoute.delete('/launchers/:id', async (req, res) => {
-    const param = req.params.id
-    console.log(param);
-
+    const param = Number(req.params.id)
     const finder = await db.then(data => data.find({ id: param }).toArray())
     if (finder.length === 0) {
         res.status(404).json({ msg: 'id not found' })
