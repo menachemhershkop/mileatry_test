@@ -11,13 +11,13 @@ function App() {
 
   return (
     <>
-    {/* <Layout> */}
+    <Layout>
      <Routes>
-      <Route index element={<HomePage/>}/>
+      <Route path='/' element={<HomePage/>}/>
       <Route path ="/Launcher/:id" element={<LauncherDetailsPage/>}/>
       <Route path='/AddLauncher' element={<AddLauncherPage/>}/>
      </Routes>
-     {/* </Layout> */}
+     </Layout>
     </>
   )
 }

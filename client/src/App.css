@@ -1,5 +1,61 @@
+body{
+    background: #596b6634;
+    color: black;
+}
+input{
+    border-radius: 400px;
+    height: 2em;
+}
+button{
+    border-radius: 80px;
+}
+select{
+    border-radius: 400px;
+    height: 2em;
+}
 .new-rocket{
     display: flex;
     flex-direction: column;
     gap: 10px;
+    border-style: inherit;
+    width: min-content;
+    justify-self: center;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+table{
+    width: 90%;
+    margin: 40px auth;
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    border-style: dotted;
+}
+th{
+    padding: 12px 14px;
+   font-size: 15px;
+   border-style: double;
+}
+td{
+    padding: 12px 14px;
+    border-style: solid;
+}
+tr:nth-child(even){
+    background: gray;
+}
+.filter{
+    background: lightgray;
+    display: flex;
+    margin-left: 40%;
+    flex-direction: column;
+    align-self: center;
+    width: max-content;
+}
+.seccess{
+    color: green;
+    justify-self: center;
+    font-size: xx-large;
+}
+.worng{
+    color: green;
+    justify-self: center;
+    font-size: xx-large;
 }
