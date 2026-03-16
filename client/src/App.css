@@ -1,6 +1,12 @@
 body{
     background: #596b6634;
     color: black;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
+.statment{
+    font-weight: bolder;
+    justify-self: center;
 }
 input{
     border-radius: 400px;
@@ -58,4 +64,14 @@ tr:nth-child(even){
     color: green;
     justify-self: center;
     font-size: xx-large;
+}
+.lancher-tab{
+    background-color: aliceblue;
+    border-style: outset;
+    width: 40em;
+    justify-items: center;
+    justify-self: center;
+}
+.lancher-tab p{
+    font-size: 20px;
 }

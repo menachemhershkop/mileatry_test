@@ -31,8 +31,9 @@ function HomePage() {
           localStorage.setItem('amount', launcher.length)
   return (
     <div>
+      <p className='statment'>
 On this page, you can view the launchers deployed in Iran.
-Click on the id number to get more details...
+Click on the id number to get more details...</p>
 <form className='filter' onChange={()=>setFIlter(true)}>
   <label htmlFor="city">City
         <input id="city" type="text" onChange={(e)=>setCity(e.target.value)}/>
