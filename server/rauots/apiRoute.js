@@ -8,9 +8,12 @@ apiRoute.get('/launchers', async (req, res) => {
     res.send(await db.then(data => data.find({}).toArray()))
 })
 apiRoute.post('/launchers', async (req, res) => {
-
+    console.log(req.body);
+    
     const { id, city, rocketType, latitude, longitude, name } = req.body
-    if (id, !city, !rocketType, !latitude, !longitude, !name) {
+    console.log(5);
+    
+    if ( !city, !rocketType, !latitude, !longitude, !name) {
         res.status(401).json({ msg: 'Requyemnts felds less' })
     }
     else {
