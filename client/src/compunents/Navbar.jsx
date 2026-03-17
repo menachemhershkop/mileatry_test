@@ -8,6 +8,7 @@ function Navbar({children}) {
   const token = localStorage.getItem('token')
   const navigate = useNavigate()
   const [myData, setMyData] = useState()
+  const rank = localStorage.getItem('Rank')
   useEffect(() => {
          (async () => {
              try {
@@ -28,15 +29,23 @@ function Navbar({children}) {
                }
              })()
            },[])
+           const whoami =function (){
+              if (myData) {
+                alert(JSON.stringify({username:myData.username, type: myData.user_type}))
+              }
+              else{
+                navigate('/LoginPage')
+              }
+           }
   return (
     <div>
       {!token &&  <Link to={'/LoginPage'}><button>login</button></Link>}
-      {token && <button onClick={()=>{localStorage.removeItem('token');navigate('/')}}>Log out</button>}
-      <button onClick={()=>alert(JSON.stringify(myData))}>Who am i</button>
+      {token && <button onClick={()=>{localStorage.clear();navigate('/')}}>Log out</button>}
+      <button onClick={whoami}>Who am i</button>
         <Link to={'/'}><button>HomePage</button></Link>
-        <Link to={'/AddLauncher'}><button>Add</button></Link>
-        <Link to={'/RegisterPage'}><button>register</button></Link>
-        <Link to={'/UserList'}><button>User List</button></Link>
+        {(rank == 'admin' ||rank == 'Air Force') &&<Link to={'/AddLauncher'}><button>Add Launcher</button></Link>}
+        {rank == 'admin' && <><Link to={'/RegisterPage'}><button>register</button></Link>
+<Link to={'/UserList'}><button>User List</button></Link></>}
       <main>{children}</main>
     </div>
   )

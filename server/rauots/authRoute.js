@@ -71,7 +71,7 @@ authRoute.post('/login', async (req, res) => {
 
     const paylod = { agent: agent }
     const token = jwt.sign(paylod, secret, { expiresIn: '15m' })
-    res.status(200).json({ token })
+    res.status(200).json({ token , rank:agent[0].user_type})
 
 
 })
