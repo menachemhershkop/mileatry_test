@@ -29,7 +29,6 @@ function AddLauncherPage() {
     }
   return (
     <div>
-      <button onClick={()=>navigat('/')}>Back HomePage</button>
       <form className='new-rocket' action="" onSubmit={handelSubmit}>
             <label htmlFor="name">Name:
         <input required id="name" type="text" onChange={(e)=>setName(e.target.value)}/>

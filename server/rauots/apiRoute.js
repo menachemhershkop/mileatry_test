@@ -6,8 +6,9 @@ import { Intelligence } from '../middeleware/IntelligenceConncect.js';
 import { adminConnect } from '../middeleware/adminConnect.js';
 
 export const apiRoute = express();
-const db = run().then(data => { data.collection('racet') })
+const db = run().then(data => data.collection('racet'))
 apiRoute.get('/launchers', authToken, async (req, res) => {
+
     res.send(await db.then(data => data.find({}).toArray()))
 })
 
@@ -59,6 +60,19 @@ apiRoute.put('/launchers/:id', authToken, Intelligence || adminConnect, async (r
     }
     else {
         const update = await db.then(data => data.updateOne({ id: param }, { $set: req.body }))
+
+        res.status(200).json({ msg: update.upsertedId })
+    }
+})
+
+apiRoute.put('/launchers/destroy/:id', authToken, async (req, res) => {
+    const param = Number(req.params.id)
+    const finder = await db.then(data => data.find({ id: param }).toArray())
+    if (finder.length === 0) {
+        res.status(404).json({ msg: 'id not found' })
+    }
+    else {
+        const update = await db.then(data => data.updateOne({ id: param }, { $set: {detroy:true} }))
 
         res.status(200).json({ msg: update.upsertedId })
     }
