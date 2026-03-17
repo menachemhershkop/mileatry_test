@@ -3,12 +3,15 @@ import run from '../db/connect.js';
 import { User } from '../modules/userModel.js';
 import jwt from 'jsonwebtoken';
 import 'dotenv/config'
+import { authToken } from '../middeleware/authToken.js';
+import { adminConnect } from '../middeleware/adminConnect.js';
 
 export const authRoute = express();
 const db = run().then((data) => data.collection('users'))
 const secret = process.env.SECRET
 
-authRoute.post('/register/create', async (req, res) => {
+authRoute.post('/register/create', authToken, adminConnect, async (req, res) => {
+    
     const {id, username, password, email, user_type, } = req.body
     if (!username, !password, !email, !user_type) {
         return res.status(401).json({ msg: 'Imported filed less' })
@@ -17,7 +20,7 @@ authRoute.post('/register/create', async (req, res) => {
     res.status(201).json({user:create.insertedId})
 })
 
-authRoute.put('/register/update/:id', async (req, res) => {
+authRoute.put('/register/update/:id', authToken, adminConnect, async (req, res) => {
     const param = Number(req.params.id)
     const finder = await db.then(data => data.find({ id: param }).toArray())
     if (finder.length === 0) {
@@ -30,7 +33,7 @@ authRoute.put('/register/update/:id', async (req, res) => {
     }
 })
 
-authRoute.delete('/register/delete/:id', async (req, res) => {
+authRoute.delete('/register/delete/:id', authToken, adminConnect, async (req, res) => {
     const param = req.params.id
     const finder = await db.then(data => data.find({ id: param }).toArray())
     if (finder.length === 0) {
@@ -52,14 +55,17 @@ authRoute.post('/login', async (req, res) => {
     if (agent.length === 0){
        return res.status(401).json({ message: "Invalid credentials" });
     }
+    const lest = {last_login:Date()}
+    const update = await db.then(data => data.updateOne({ username:username },{$set:lest}))
+    
     const paylod={agent:agent}
     const token = jwt.sign(paylod, secret, {expiresIn:'15m'})
-    res.status(200).json({token, agent})
+    res.status(200).json({token})
 
 
 })
 
-authRoute.get('/getUser', (req, res) => {
-        const {username, email, user_type, lest_login} = req.body;
-        return res.status(200).json({user_type,username, email, lest_login})
+authRoute.get('/getUser', authToken, (req, res) => {
+ 
+        return res.status(200).json(req.user['agent'][0])
 })
