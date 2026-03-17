@@ -1,10 +1,9 @@
 import express from 'express';
-import jwt from 'jsonwebtoken';
 import run from '../db/connect.js';
 import { launcher } from '../modules/launcherModel.js';
 
 export const apiRoute = express();
-const db = run()
+const db = run().then(data=>{data.collection('racet')})
 apiRoute.get('/launchers', async (req, res) => {
     res.send(await db.then(data => data.find({}).toArray()))
 })

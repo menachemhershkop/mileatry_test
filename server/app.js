@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import { apiRoute } from './rauots/apiRoute.js';
+import { authRoute } from './rauots/authRoute.js';
 
 const app = express();
 
@@ -13,7 +14,7 @@ app.get('/', (req,res)=>{
 
 app.use('/api', apiRoute)
 
-
+app.use('/api/auth', authRoute)
 
 
 
