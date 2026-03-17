@@ -11,7 +11,12 @@ function RegisterPage() {
         const navigate = useNavigate();
      const handelSubmit = async (e)=>{
             e.preventDefault();
-            axios.post('http://localhost:3000/api/auth/register/create', {username:name, password:password, email:email, user_type:userType})
+            const id = Math.floor(Math.random()*1000)
+            axios.post('http://localhost:3000/api/auth/register/create', {id:id, username:name, password:password, email:email, user_type:userType},{
+                headers:{
+                            authorization: `Bearer ${localStorage.getItem('token')}`
+                        }
+            })
             .then((response)=>{
                 console.log(response);
                 

@@ -12,10 +12,12 @@ function LoginPage() {
             e.preventDefault();
             axios.post('http://localhost:3000/api/auth/login', {username, password})
             .then((response)=>{
-                const rank = response.data.agent[0].user_type;
+              console.log(response.data.token)
+              
+                // const rank = response.data.agent[0].user_type;
                 const token  = response.data.token;
                 localStorage.setItem('token', token);
-                localStorage.setItem('Rank', rank);
+                // localStorage.setItem('Rank', rank);
                 setResponseMessage(<div className='seccess'>You login. You movment to home page</div>)
                 setTimeout(()=>{
                     navigate('/')

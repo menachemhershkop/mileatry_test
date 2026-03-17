@@ -8,7 +8,7 @@ function LauncherDetailsPage() {
   const {id} = useParams()
   const [launcher, setLauncher] =useState([]);
   const navigate = useNavigate()
-  const [response, setResponseMessage] = useState('')
+
   const [update, setUpdate] = useState(false);
 
    useEffect(() => {

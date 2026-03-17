@@ -39,12 +39,20 @@ authRoute.put('/register/update/:id', authToken, adminConnect, async (req, res) 
 })
 
 authRoute.delete('/register/delete/:id', authToken, adminConnect, async (req, res) => {
-    const param = req.params.id
+    console.log(1);
+    
+    const param = Number(req.params.id)
+    console.log(param);
+    
     const finder = await db.then(data => data.find({ id: param }).toArray())
     if (finder.length === 0) {
-        res.status(404).json({ msg: 'id not found' })
+        console.log(2);
+        
+       return res.status(404).json({ msg: 'id not found' })
     }
     else {
+        console.log(3);
+        
         const del = await db.then(data => data.deleteOne({ id: param }))
         res.status(200).json({ msg: del.deletedCount })
     }
@@ -53,16 +61,21 @@ authRoute.delete('/register/delete/:id', authToken, adminConnect, async (req, re
 authRoute.post('/login', async (req, res) => {
     
     const {username, password} = req.body;
+  
+    
     if (!username || !password){
+      
         res.status(400).json({message: "username and password are required"})
     }
     const agent = await db.then(data => data.find({ username: username ,password:password}).toArray())
     if (agent.length === 0){
+   
+        
        return res.status(401).json({ message: "Invalid credentials" });
     }
     const lest = {last_login:Date()}
     const update = await db.then(data => data.updateOne({ username:username },{$set:lest}))
-    
+
     const paylod={agent:agent}
     const token = jwt.sign(paylod, secret, {expiresIn:'15m'})
     res.status(200).json({token})

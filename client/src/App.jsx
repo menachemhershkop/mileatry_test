@@ -7,6 +7,7 @@ import AddLauncherPage from './pages/AddLauncherPage'
 import Layout from './compunents/Layout'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
+import UserList from './pages/UserList'
 
 function App() {
   
@@ -20,6 +21,7 @@ function App() {
       <Route path='/AddLauncher' element={<AddLauncherPage/>}/>
       <Route path='/LoginPage' element={<LoginPage/>}/>
       <Route path='/RegisterPage' element={<RegisterPage/>}/>
+      <Route path='/UserList' element={<UserList/>}/>
      </Routes>
      </Layout>
     </>
