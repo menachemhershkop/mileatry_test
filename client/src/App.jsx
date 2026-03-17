@@ -6,6 +6,7 @@ import LauncherDetailsPage from './pages/LauncherDetailsPage'
 import AddLauncherPage from './pages/AddLauncherPage'
 import Layout from './compunents/Layout'
 import LoginPage from './pages/LoginPage'
+import RegisterPage from './pages/RegisterPage'
 
 function App() {
   
@@ -18,6 +19,7 @@ function App() {
       <Route path ="/Launcher/:id" element={<LauncherDetailsPage/>}/>
       <Route path='/AddLauncher' element={<AddLauncherPage/>}/>
       <Route path='/LoginPage' element={<LoginPage/>}/>
+      <Route path='/RegisterPage' element={<RegisterPage/>}/>
      </Routes>
      </Layout>
     </>

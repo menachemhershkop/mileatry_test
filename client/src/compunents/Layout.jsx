@@ -7,6 +7,7 @@ function Layout({children}) {
         <Link to={'/LoginPage'}><button>login</button></Link>
         <Link to={'/'}><button>HomePage</button></Link>
         <Link to={'/AddLauncher'}><button>Add</button></Link>
+        <Link to={'RegisterPage'}><button>register</button></Link>
       <main>{children}</main>
     </div>
   )
