@@ -22,12 +22,6 @@ function HomePage() {
               }
             })()
           },[])
-   useEffect(()=>{
-    console.log(city);
-    console.log(type);
-    console.log(launcher.length)
-    
-   },[city, type])
           localStorage.setItem('amount', launcher.length)
   return (
     <div>
