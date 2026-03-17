@@ -1,10 +1,12 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router';
+import EditUser from '../compunents/EditUser';
 
 function UserList() {
  const [users, setUsers] = useState([])
    const [response, setResponseMessage] = useState('')
+   const [edit, setEdit]= useState(false)
      const navigate = useNavigate()
      useEffect(() => {
          (async () => {
@@ -45,7 +47,6 @@ function UserList() {
             }
    return (
      <div>
-        123
        <p className='statment'>
  On this page, you can view all solider datelis.
  Click on the id number to get more details...</p>
@@ -58,14 +59,17 @@ function UserList() {
    </tr>
    
      { users.map((user)=>{return(
+      <>
         <tr key={user.id}>
         <td>{user.id}</td>
          <td>{user.username}</td>
          <td>{user.email}</td>
          <td>{user.user_type}</td>
-         <button onClick={()=>deleted(user.id)}>Edit User</button>
-         <button>Delete User</button>
+         <button onClick={()=>setEdit(!edit)}>Edit User</button>
+         <button onClick={()=>deleted(user.id)}>Delete User</button>
    </tr>
+   {edit&& <EditUser props={user}/>}
+   </>
        )})}
  
  </table>
