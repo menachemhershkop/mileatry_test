@@ -27,8 +27,16 @@ authRoute.put('/register/update/:id', async (req, res) => {
     }
 })
 
-authRoute.delete('register/delete/:id', (req, res) => {
-
+authRoute.delete('/register/delete/:id', async (req, res) => {
+    const param = req.params.id
+    const finder = await db.then(data => data.find({ id: param }).toArray())
+    if (finder.length === 0) {
+        res.status(404).json({ msg: 'id not found' })
+    }
+    else {
+        const del = await db.then(data => data.deleteOne({ id: param }))
+        res.status(200).json({ msg: del.deletedCount })
+    }
 })
 
 authRoute.post('/login', (req, res) => {
